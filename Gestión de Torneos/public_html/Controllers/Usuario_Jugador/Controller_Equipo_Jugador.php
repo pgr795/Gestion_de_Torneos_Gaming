@@ -34,6 +34,7 @@
                     $nombreEquipo =$_SESSION['nombreEquipo'];
                     $idUsuario= $_SESSION['idUsuario'];
                     $idEquipo=obtenerIdEquipoCreado($conexion,$nombreEquipo);
+                    // var_dump($idEquipo);
                     $idEquipo=$idEquipo[0][0];
                     abandonarEquipo($conexion, $idEquipo, $idUsuario);
                     echo "<script>swal({ icon: 'success', title: '¡Enhorabuena!', text: 'Has abandonado el equipo', buttons: false });</script>";

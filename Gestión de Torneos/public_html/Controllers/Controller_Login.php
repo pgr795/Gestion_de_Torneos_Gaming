@@ -15,6 +15,7 @@
 	// Cuando se envia el formulario
 	if ($_POST) {
 		$conexion = conexion();
+		// var_dump($_POST);
 		if (empty($_POST["nick"]) || empty($_POST["password"])) {
 			echo "<script>Swal.fire({ icon: 'error', title: 'Error', text: 'Dede rellenar los campos para iniciar sesión', showConfirmButton: false, timer: 2000})</script>";
 		} else if (loginUsuario($conexion, $_POST["nick"], MD5($_POST["password"]))) { // Si es correcto redirigimos

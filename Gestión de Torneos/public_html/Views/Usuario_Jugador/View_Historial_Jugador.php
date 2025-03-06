@@ -71,17 +71,19 @@
 									if($datos!=FALSE) {
 										foreach($datos as $indice => $dato){
 											echo "<tr class='table-light'>";
-												$equipo1=$datos[$indice][0];
-												$equipo1=obtenerNombresEquipos($conexion,$equipo1);
-												$equipo1=$equipo1[0];
-												echo "<td>".$equipo1."</td>";
-												$equipo2=$datos[$indice][1];
-												$equipo2=obtenerNombresEquipos($conexion,$equipo2);
-												$equipo2=$equipo2[0];
-												echo "<td>".$equipo2."</td>";
-												echo "<td>".$datos[$indice][2]."</td>";
-												echo "<td>".$datos[$indice][3]."</td>";
-												echo "<td>".$datos[$indice][4]."</td>";
+											$equipo1=$datos[$indice][0];
+											$equipo1=obtenerNombresEquipos($conexion,$equipo1);
+											$equipo1=$equipo1[0];
+											// var_dump($equipo1);
+											echo "<td>".$equipo1."</td>";
+											$equipo2=$datos[$indice][1];
+											$equipo2=obtenerNombresEquipos($conexion,$equipo2);
+											$equipo2=$equipo2[0];
+											echo "<td>".$equipo2."</td>";
+											echo "<td>".$datos[$indice][2]."</td>";
+											echo "<td>".$datos[$indice][3]."</td>";
+											echo "<td>".$datos[$indice][4]."</td>";
+										
 											echo "</tr>";
 										}
 									} else if($datos==FALSE) {

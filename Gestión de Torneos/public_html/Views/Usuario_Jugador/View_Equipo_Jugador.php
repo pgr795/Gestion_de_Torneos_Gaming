@@ -11,6 +11,7 @@
 	<div class="card border-light pt-5 px-4 my-5 text-center" style="background:rgba(0,0,0,0.8);">
 		<?php
 			$datosEquipo = datosEquipo($conexion, $_SESSION['idUsuario']);
+			// var_dump($datosEquipo[0]);
 			$datosEquipoJugador = datosEquipoJugador($conexion, $datosEquipo[0]);
 			if (empty($datosEquipoJugador)) { // Si el usuario no pertenece a ningún equipo
 				echo '<h1 class="display-4 text-white fuentePersonalizadaRegistrado">Equipo</h1>';
@@ -53,23 +54,31 @@
 				echo "<div class='row g-4 p-4 mb-4'>";
 					$esLiderEquipo = esLiderEquipo($conexion, $_SESSION['idUsuario']);
 					$torneoActivo = torneoActivo($conexion, $datosEquipo[0]);
-					if ($torneoActivo == FALSE) { // Si el torneo no está en curso el usuario tendrá acceso a más funciones
+					$torneoInactivo = torneoInactivo($conexion, $datosEquipo[0]);
+					if ($torneoInactivo != FALSE) {
 						if ($esLiderEquipo[0][0] == 'Si') { // Si el usuario es líder y su equipo no está en un torneo
 							echo "<div class='col'>";
 								echo "<a class='btn btn-outline-light w-100' href='./Controller_Gestionar_Equipo_Jugador.php'>Gestionar equipo</a>";
 							echo "</div>";
+							echo "<div class='col'>";
+								echo "<a class='btn btn-outline-light w-100' href='./Controller_Estadisticas_Equipo_Jugador.php'>Estadísticas del equipo</a>";
+							echo "</div>";
 						}
-						if ($esLiderEquipo[0][0] == 'No') { // Si el usuario no es líder, quiere abandonar el equipo y su equipo no está en un torneo
+						if ($esLiderEquipo[0][0] == 'No') {// Si el usuario no es líder, quiere abandonar el equipo y su equipo no está en un torneo
 							echo "<div class='col'>";
 								echo "<form method='POST'>";
 									echo "<button name='AbandonarEquipo' class='btn btn-outline-light w-100'>Abandonar equipo</button>";
 								echo "</form>";
 							echo "</div>";
+							echo "<div class='col'>";
+								echo "<a class='btn btn-outline-light w-100' href='./Controller_Estadisticas_Equipo_Jugador.php'>Estadísticas del equipo</a>";
+							echo "</div>";
 						}
+					} else if ($torneoActivo != FALSE) {
+						echo "<div class='col'>";
+							echo "<a class='btn btn-outline-light w-100' href='./Controller_Estadisticas_Equipo_Jugador.php'>Estadísticas del equipo</a>";
+						echo "</div>";
 					}
-					echo "<div class='col'>";
-						echo "<a class='btn btn-outline-light w-100' href='./Controller_Estadisticas_Equipo_Jugador.php'>Estadísticas del equipo</a>";
-					echo "</div>";
 				echo "</div>";
 			}
 		?>
